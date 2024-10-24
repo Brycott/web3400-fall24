@@ -1,13 +1,13 @@
-<?php 
-include 'config.php';
-include 'templates/head.php';
-include 'templates/nav.php';
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
 
+<?php 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
     // Redirect user to login page or display an error message
     $_SESSION['messages'][] = "You must be an administrator to access that resource.";
-    echo '<meta http-equiv="refresh" content="0;url=login.php">';
+    header('Location: login.php');
     exit;
 }
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Invalid article ID
         $_SESSION['messages'][] = "Invalid article ID.";
-        echo '<meta http-equiv="refresh" content="0;url=articles.php">';
+        header('Location: articles.php');
         exit;
     }
 }

@@ -9,7 +9,7 @@
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
     // Redirect user to login page or display an error message
     $_SESSION['messages'][] = "You must be an administrator to access that resource.";
-    echo '<meta http-equiv="refresh" content="0;url=login.php">';
+    header('Location: login.php');
     exit;
 }
 ?>

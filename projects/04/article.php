@@ -1,7 +1,8 @@
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
+
 <?php 
-include 'config.php';
-include 'templates/head.php';
-include 'templates/nav.php';
 
    if (isset($_GET['id'])) {
     // Prepare the SQL query to fetch the article based on the provided ID

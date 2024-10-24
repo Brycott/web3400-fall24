@@ -1,7 +1,8 @@
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
+
 <?php
-include 'config.php';
-include 'templates/head.php'; 
-include 'templates/nav.php'; 
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

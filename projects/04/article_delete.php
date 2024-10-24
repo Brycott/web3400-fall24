@@ -7,7 +7,7 @@
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
    
     $_SESSION['messages'][] = "You must be an administrator to access that resource.";
-    echo '<meta http-equiv="refresh" content="0;url=login.php">';
+    header('Location: login.php');
     exit;
 }
 
@@ -22,13 +22,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
   
     if (!$article) {
         $_SESSION['messages'][] = "An article with that ID did not exist.";
-        echo '<meta http-equiv="refresh" content="0;url=articles.php">';
+        header('Location: articles.php');
         exit;
     }
 } else {
  
     $_SESSION['messages'][] = "Invalid article ID.";
-    echo '<meta http-equiv="refresh" content="0;url=articles.php">';
+    header('Location: articles.php');
     exit;
 }
 
@@ -38,7 +38,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] == 'yes') {
     $stmt = $pdo->prepare('DELETE FROM articles WHERE id = ?');
     if ($stmt->execute([$id])) {
       
-        $_SESSION['messages'][] = "The article was successfully deleted.";
+        $_SESSION['messages'][] = "You deleted the article";
         echo '<meta http-equiv="refresh" content="0;url=articles.php">';
         exit;
     } else {

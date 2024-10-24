@@ -1,7 +1,9 @@
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
+
 <?php 
-include 'config.php';
-include 'templates/head.php';
-include 'templates/nav.php';
+
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
     // Redirect user to login page or display an error message
@@ -29,22 +31,46 @@ if (!$articles) {
 
 // Step 7: If the 'is_published' control is clicked, toggle the status
 if (isset($_GET['id']) && isset($_GET['is_published'])) {
-    $id = $_GET['id'];
-    $is_published = $_GET['is_published'] == '1' ? 0 : 1;
+    $articleId = $_GET['id'];
+    // Toggle featured status
+    $currentPublished = $_GET['is_published'] == '1' ? 1 : 0;
+    $ispublished = $currentPublished == 1 ? 0 : 1; // Toggle logic
 
-    $updateStmt = $pdo->prepare('UPDATE articles SET is_published = ? WHERE id = ?');
-    $updateStmt->execute([$is_published, $id]);
+    // Prepare the SQL statement to update the featured status
+    $updateStmt = $pdo->prepare('UPDATE articles SET is_published = :is_published WHERE id = :id');
+    $updateStmt->execute(['is_published' => $ispublished, 'id' => $articleId]);
+
+    // Set a message based on the action taken
+    if ($ispublished) {
+        $_SESSION['messages'][] = "The article has been published.";
+    } else {
+        $_SESSION['messages'][] = "The article has been un_published.";
+    }
+
+    // Redirect back to articles.php to avoid form resubmission
     echo '<meta http-equiv="refresh" content="0;url=articles.php">';
     exit;
 }
 
 // Step 8: If the 'is_featured' control is clicked, toggle the status
 if (isset($_GET['id']) && isset($_GET['is_featured'])) {
-    $id = $_GET['id'];
-    $is_featured = $_GET['is_featured'] == '1' ? 0 : 1;
+    $articleId = $_GET['id'];
+    // Toggle featured status
+    $currentFeatured = $_GET['is_featured'] == '1' ? 1 : 0;
+    $isFeatured = $currentFeatured == 1 ? 0 : 1; // Toggle logic
 
-    $updateStmt = $pdo->prepare('UPDATE articles SET is_featured = ? WHERE id = ?');
-    $updateStmt->execute([$is_featured, $id]);
+    // Prepare the SQL statement to update the featured status
+    $updateStmt = $pdo->prepare('UPDATE articles SET is_featured = :is_featured WHERE id = :id');
+    $updateStmt->execute(['is_featured' => $isFeatured, 'id' => $articleId]);
+
+    // Set a message based on the action taken
+    if ($isFeatured) {
+        $_SESSION['messages'][] = "The article has been featured.";
+    } else {
+        $_SESSION['messages'][] = "The article has been un_featured.";
+    }
+
+    // Redirect back to articles.php to avoid form resubmission
     echo '<meta http-equiv="refresh" content="0;url=articles.php">';
     exit;
 }

@@ -1,8 +1,8 @@
-<?php  
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
 
-include 'config.php'; 
-include 'templates/head.php'; 
-include 'templates/nav.php'; 
+<?php  
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
     // Redirect user to login page or display an error message
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($userExists) {
         // Email already exists, redirect back with error message
         $_SESSION['messages'][] = "That email already exists. Please choose another.";
-        echo '<meta http-equiv="refresh" content="0;url=users_manage.php">';
+        header('Location: users_manage.php');
         exit;
     } else {
         // Email is unique, proceed with inserting the user
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt) {
             // Redirect back to users_manage.php with success message
             $_SESSION['messages'][] = "The user account for $full_name was created. They will need to login to activate their account.";
-            echo '<meta http-equiv="refresh" content="0;url=users_manage.php">';
+            header('Location: users_manage.php');
             exit;
         } else {
             // Insertion failed, redirect back with error message

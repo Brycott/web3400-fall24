@@ -1,7 +1,9 @@
+<?php include 'config.php'; ?>
+<?php include 'templates/head.php'; ?>
+<?php include 'templates/nav.php'; ?>
+
+
 <?php
-include 'config.php';
-include 'templates/head.php';
-include 'templates/nav.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
     $_SESSION['messages'][] = "You must be an administrator to access that resource.";
