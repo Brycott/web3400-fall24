@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // user accojnt does not exist or the password is invalid
         $_SESSION['messages'] [] = "Invalid email or password. Please try again.";
-        header('Location: login.php');
+        echo '<meta http-equiv="refresh" content="0;url=login.php">';
         exit;
     }
     
