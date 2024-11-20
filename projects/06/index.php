@@ -24,7 +24,7 @@ if (!$articles) {
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-128x128">
-                        <img class="is-rounded" src="https://picsum.photos/128<?= $article['id'] ?>">
+                        <img class="is-rounded" src="https://picsum.photos/128?random=<?= $article['id'] ?>">
                     </p>
                 </figure>
                 <div class="media-content">
