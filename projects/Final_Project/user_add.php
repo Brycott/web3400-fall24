@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($userExists) {
         // Email already exists, redirect back with error message
         $_SESSION['messages'][] = "That email already exists. Please choose another.";
-        header('Location: users_manage.php');
+        echo '<meta http-equiv="refresh" content="0;url=users_manage.php">';
         exit;
     } else {
         // Email is unique, proceed with inserting the user

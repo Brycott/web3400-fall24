@@ -181,7 +181,7 @@ foreach ($kpiQueries as $kpi => $query) {
     </div>
     <div class="column is-6">
         <p class="panel-heading panel is-link ">Article - Quick Add</p>
-    <form action="" method="post">
+    <form action="article_add.php" method="post">
         <!-- Title -->
         <div class="field">
             <label class="label">Title</label>
@@ -212,7 +212,7 @@ foreach ($kpiQueries as $kpi => $query) {
 <div class="columns">
     <div class="column is-6">
         <p class="panel-heading panel is-primary has-text-white">Ticket - Quick Add</p>
-    <form action="" method="post">
+    <form action="ticket_create.php" method="post">
         <div class="field">
             <label class="label">Title</label>
             <div class="control">
